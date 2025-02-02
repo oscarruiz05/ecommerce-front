@@ -1,0 +1,40 @@
+<!-- Header Admin-->
+<app-header-admin></app-header-admin>
+
+<!-- Page Content List Products-->
+<div class="container">
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">Spring eCommerce <small>Productos</small></h1>
+
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+    <li class="breadcrumb-item active">Ver Productos</li>
+  </ol>
+
+  <a class="btn btn-primary"> Crear Producto</a>
+  <h2>Productos</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of products; track $index) {
+      <tr>
+        <td>{{ product.code }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td><button class="btn btn-warning">Editar</button></td>
+        <td><button class="btn btn-danger">Eliminar</button></td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
