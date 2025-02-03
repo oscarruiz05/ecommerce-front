@@ -4,6 +4,7 @@ import { HeaderAdminComponent } from '../header-admin/header-admin.component';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '@app/common/product';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-add',
@@ -26,7 +27,8 @@ export class ProductAddComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +62,10 @@ export class ProductAddComponent implements OnInit {
 
     this.productService
       .createProduct(formData)
-      .subscribe(() => this.router.navigate(['/admin/products']));
+      .subscribe(() => {
+        this.toastr.success('Producto creado correctamente!', 'Producto');
+        this.router.navigate(['/admin/products']);
+      });
   }
 
   getProduct(productId: number): void {
@@ -90,7 +95,10 @@ export class ProductAddComponent implements OnInit {
 
     this.productService
       .updateProduct(formData, this.id)
-      .subscribe(() => this.router.navigate(['/admin/products']));
+      .subscribe(() => {
+        this.toastr.success('Producto actualizado correctamente!', 'Producto');
+        this.router.navigate(['/admin/products'])
+      });
   }
 
   onFileSelected(event: any): void {
