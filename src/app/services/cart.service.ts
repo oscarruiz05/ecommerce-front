@@ -30,7 +30,7 @@ export class CartService {
   }
 
   totalCart(): number {
-    return this.itemList.reduce((total, item) => total + item.getTotalPriceItem(), 0);
+    return Array.from(this.items.values()).reduce((total, item) => total + item.getTotalPriceItem(), 0);
   }
 
   converToListFromMap(): ItemCart[] {

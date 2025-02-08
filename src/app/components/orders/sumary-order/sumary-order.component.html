@@ -18,9 +18,15 @@
         <div class="col-lg-9">
           <div class="card-body">
             <h5 class="card-title">DATOS ORDEN</h5>
-            <h6><strong> Nombre: </strong></h6>
-            <h6><strong>Correo: </strong></h6>
-            <h6><strong> Dirección: </strong></h6>
+            <h6>
+              <strong> Nombre: {{ name }}</strong>
+            </h6>
+            <h6>
+              <strong>Correo: {{ email }}</strong>
+            </h6>
+            <h6>
+              <strong> Dirección: {{ address }}</strong>
+            </h6>
 
             <h5 class="card-title">PRODUCTOS</h5>
             <table class="table">
@@ -40,7 +46,14 @@
                   <td>{{ item.price }}</td>
                   <td>{{ item.quantity }}</td>
                   <td>{{ item.getTotalPriceItem() }}</td>
-                  <td><button class="btn btn-danger" (click)="deleteItemCart(item.productId)">Quitar</button></td>
+                  <td>
+                    <button
+                      class="btn btn-danger"
+                      (click)="deleteItemCart(item.productId)"
+                    >
+                      Quitar
+                    </button>
+                  </td>
                 </tr>
                 }
               </tbody>
@@ -53,9 +66,9 @@
 
           <ul class="list-group">
             <li class="list-group-item">
-              <h5>Total:</h5>
+              <h5>Total: {{ totalCart }}</h5>
             </li>
-            <a class="btn btn-dark">Pagar con Paypal</a>
+            <a class="btn btn-dark mt-4">Pagar con Paypal</a>
           </ul>
         </div>
       </div>
