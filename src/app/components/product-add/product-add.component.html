@@ -16,21 +16,35 @@
     (ngSubmit)="saveProduct()"
     enctype="multipart/form-data"
   >
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="codigo">Codigo:</label>
-    <div class="col-sm-10">
-      <input
-        [(ngModel)]="code"
-        type="text"
-        class="form-control"
-        id="codigo"
-        name="code"
-        placeholder="Ingrese el codigo del producto"
-        autocomplete="off"
-        required
-      />
+    <div class="form-group row">
+      <label class="control-label col-sm-2" for="nombre"
+        >Elija una categoría:</label
+      >
+      <div class="col-sm-10">
+        <div class="combo-box">
+          <select [(ngModel)]="categoryId" name="category" id="category">
+            @for (item of categories; track $index) {
+            <option value="{{ item.id }}">{{ item.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="codigo">Codigo:</label>
+      <div class="col-sm-10">
+        <input
+          [(ngModel)]="code"
+          type="text"
+          class="form-control"
+          id="codigo"
+          name="code"
+          placeholder="Ingrese el codigo del producto"
+          autocomplete="off"
+          required
+        />
+      </div>
+    </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="nombre">Nombre:</label>
       <div class="col-sm-10">
@@ -63,7 +77,6 @@
         </textarea>
       </div>
     </div>
-
     <div class="form-group">
       <label class="control-label col-sm-2" for="precio">Precio:</label>
       <div class="col-sm-10">
@@ -80,15 +93,20 @@
         />
       </div>
     </div>
-
     <div class="form-group">
       <label class="control-label col-sm-2" for="img">Imagen:</label>
       <div class="col-sm-10">
-        <input type="file" class="form-control-file" id="img" name="img" (change)="onFileSelected($event)" />
+        <input
+          type="file"
+          class="form-control-file"
+          id="img"
+          name="img"
+          (change)="onFileSelected($event)"
+        />
       </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-5">
       <div class="col-sm-2">
         <button type="submit" class="btn btn-success">
           <span class="glyphicon glyphicon-saved"></span> Guardar
