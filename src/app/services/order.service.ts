@@ -19,7 +19,8 @@ export class OrderService {
   }
 
   updateOrder(formData: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${this.update}`, formData);
+    console.log("🚀 ~ OrderService ~ updateOrder ~ formData:", formData)
+    return this.http.post<any>(`${this.apiUrl}/${this.update}`, formData);
   }
 
   getOrderByUserId(userId: number): Observable<Order[]> {

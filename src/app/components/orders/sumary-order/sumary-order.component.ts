@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { DataPayment } from '@app/common/data-payment';
 import { ItemCart } from '@app/common/item-cart';
 import { Order } from '@app/common/order';
 import { OrderProduct } from '@app/common/order-product';
@@ -9,6 +10,8 @@ import { User } from '@app/common/user';
 import { HeaderUserComponent } from '@app/components/header-user/header-user.component';
 import { CartService } from '@app/services/cart.service';
 import { OrderService } from '@app/services/order.service';
+import { PaymentServiceService } from '@app/services/payment-service.service';
+import { SessionStorageService } from '@app/services/session-storage.service';
 import { UserService } from '@app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -32,6 +35,8 @@ export class SumaryOrderComponent implements OnInit {
     private cartService: CartService,
     private userService: UserService,
     private orderService: OrderService,
+    private paymentService: PaymentServiceService,
+    private sessionStorageService: SessionStorageService,
     private toastr: ToastrService
   ) {}
 
@@ -49,6 +54,15 @@ export class SumaryOrderComponent implements OnInit {
     const order = new Order(null, new Date(), this.orderProducts, this.userId, OrderState.CANCELLED);
     this.orderService.createOrder(order).subscribe((data: Order) => {
       this.toastr.success('Orden generada con éxito');
+      this.sessionStorageService.setItem('order', data);
+    });
+
+    // redireccionar a la página de pago
+    let urlPayment: string = '';
+    let dataPayment = new DataPayment('PAYPAL', this.totalCart.toString(), 'USD', 'Compra de productos');
+    this.paymentService.getUrlPaypalPayment(dataPayment).subscribe((response) => {
+      urlPayment = response.url;
+      window.location.href = urlPayment;
     });
   }
 

@@ -6,6 +6,7 @@ import { CategoryListComponent } from './components/category/category-list/categ
 import { CategoryAddComponent } from './components/category/category-add/category-add.component';
 import { DetailProductComponent } from './components/cart/detail-product/detail-product.component';
 import { SumaryOrderComponent } from './components/orders/sumary-order/sumary-order.component';
+import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
 
 export const routes: Routes = [
   {
@@ -43,5 +44,9 @@ export const routes: Routes = [
   {
     path: 'cart/sumary',
     component: SumaryOrderComponent
+  },
+  {
+    path: 'payment/success',
+    component: PaymentSuccessComponent
   },
 ];
